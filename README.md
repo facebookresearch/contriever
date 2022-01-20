@@ -39,11 +39,11 @@ score02 = embddings[0] @ embeddings[2] #1.0095
 
 ## BEIR evaluation
 
-Scores on the BEIR benchmark can be reproduced using [beireval.py](beireval.py).
+Scores on the BEIR benchmark can be reproduced using [eval_beir.py](eval_beir.py).
 
 ```bash
 
-python beireval.py --model_name_or_path contriever-msmarco --dataset scifact
+python eval_beir.py --model_name_or_path facebook/contriever-msmarco --dataset scifact
 ```
 
 ## Available models
@@ -51,7 +51,7 @@ python beireval.py --model_name_or_path contriever-msmarco --dataset scifact
 |              Model              | Description |
 |:-------------------------------|:--------:|
 |  [facebook/contriever](https://huggingface.co/facebook/contriever) | Model pre-trained on Wikipedia and CC-net without any supervised data|
-|  [facebook/contriever-msmarco](https://huggingface.co/facebook/contriever) | Pre-trained model fine-tuned on MS-MARCO|
+|  [facebook/contriever-msmarco](https://huggingface.co/facebook/contriever-msmarco) | Pre-trained model fine-tuned on MS-MARCO|
 
 ## References
 
