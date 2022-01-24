@@ -123,6 +123,7 @@ def evaluate_model(
         is_main=True, 
         split='test', 
         metric='dot',
+        beir_data_path="BEIR/datasets",
     ):
 
     if hasattr(query_encoder, "module"):
@@ -149,8 +150,7 @@ def evaluate_model(
     )
     retriever = EvaluateRetrieval(dmodel, score_function=metric) 
     url = "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/{}.zip".format(dataset)
-    datapath = '/private/home/gizacard/clearning/datasets'
-    data_path = beir.util.download_and_unzip(url, datapath)
+    data_path = beir.util.download_and_unzip(url, beir_data_path)
     if dataset == 'cqadupstack':
         ndcgs, _maps, recalls, precisions, mrrs, recall_caps, holes = [], [], [], [], [], [], []
         cqasubsets = [
