@@ -41,9 +41,9 @@ def main(args):
     logger.info("Start indexing")
 
     ndcg, _map, recall, precision, mrr, recall_cap, hole = src.beir_utils.evaluate_model(
-        query_encoder=model,
+        query_encoder=model, 
         doc_encoder=model,
-        tokenizer=tokenizer,
+        tokenizer=tokenizer, 
         dataset=args.dataset,
         batch_size=args.per_gpu_batch_size,
         norm_query=args.norm_query,
@@ -66,14 +66,14 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument("--beir_data_path", type=str, default="BEIR/datasets" help="Directory to save and load beir datasets")
     parser.add_argument("--dataset", type=str, help="Evaluation dataset from the BEIR benchmark")
+    parser.add_argument("--beir_data_path", type=str, default="BEIR/datasets", help="Directory to save and load beir datasets")
     parser.add_argument("--text_maxlength", type=int, default=512, help="Maximum text length")
 
     parser.add_argument("--per_gpu_batch_size", default=128, type=int, help="Batch size per GPU/CPU for indexing.")
     parser.add_argument("--output_dir", type=str, default="./my_experiment", help="Output directory")
     parser.add_argument("--model_name_or_path", type=str, help="Model name or path")
-    parser.add_argument("--metric", type=str, default="dot",
+    parser.add_argument("--metric", type=str, default="dot", 
         help="Metric used to compute similarity between two embeddings")
     parser.add_argument("--norm_query", action="store_true", help="Normalize query representation")
     parser.add_argument("--norm_doc", action="store_true", help="Normalize document representation")
