@@ -51,6 +51,7 @@ def main(opt):
         is_main=dist_utils.is_main(),
         split='dev' if opt.dataset=='msmarco' else 'test',
         metric=opt.metric,
+        beir_data_path=opt.beir_data_path,
     )
 
     if dist_utils.is_main():
@@ -65,6 +66,7 @@ def main(opt):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
+    parser.add_argument("--beir_data_path", type=str, default="BEIR/datasets" help="Directory to save and load beir datasets")
     parser.add_argument("--dataset", type=str, help="Evaluation dataset from the BEIR benchmark")
     parser.add_argument("--text_maxlength", type=int, default=512, help="Maximum text length")
 
