@@ -33,8 +33,8 @@ embeddings = model(**inputs)
 Then similarity scores between the different sentences can be obtained with a dot product between the embeddings:
 ```python
 
-score01 = embddings[0] @ embeddings[1] #1.0473
-score02 = embddings[0] @ embeddings[2] #1.0095
+score01 = embeddings[0] @ embeddings[1] #1.0473
+score02 = embeddings[0] @ embeddings[2] #1.0095
 ```
 
 ## BEIR evaluation
