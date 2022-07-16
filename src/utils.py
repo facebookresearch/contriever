@@ -176,13 +176,17 @@ class WeightedAvgStats:
 
     @property
     def average_stats(self) -> Dict[str, float]:
-        local_dict = {x: self.raw_stats[x] / self.total_weights[x] for x in self.raw_stats.keys()}
+        keys = sorted(self.raw_stats.keys())
+        if torch.distributed.is_initialized():
+            torch.distributed.broadcast_object_list(keys, src=0)
         global_dict = {}
-        for k, v in local_dict.items():
-            if not isinstance(v, torch.Tensor):
-                v = torch.tensor(v)
-            v = dist_utils.average_main(v.cuda())
-            global_dict[k] = v.item()
+        for k in keys:
+            if not k in self.total_weights:
+                v = 0.0
+            else:
+                v = self.raw_stats[k] / self.total_weights[k]
+            v, _ = dist_utils.weighted_average(v, self.total_weights[k])
+            global_dict[k] = v
         return global_dict
 
 

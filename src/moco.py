@@ -101,7 +101,7 @@ class MoCo(nn.Module):
         logits = torch.cat([l_pos, l_neg], dim=1)
         return logits
 
-    def forward(self, q_tokens, q_mask, k_tokens, k_mask, stats_prefix="", **kwargs):
+    def forward(self, q_tokens, q_mask, k_tokens, k_mask, stats_prefix="", iter_stats={}, **kwargs):
         bsz = q_tokens.size(0)
 
         q = self.encoder_q(input_ids=q_tokens, attention_mask=q_mask, normalize=self.norm_query)
